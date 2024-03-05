@@ -22,7 +22,7 @@ enum carType {
 model User {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId
   name      String
-  email     String
+  email     String     @unique
   password  String
   role      UserRole   @default(PASSENGER)
   driver    Driver?
@@ -30,11 +30,11 @@ model User {
 }
 
 model Car {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  driver   Driver @relation(fields: [driverId], references: [id])
-  driverId String @unique @db.ObjectId
-  color    String
-  type     String
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  driver       Driver  @relation(fields: [driverId], references: [id])
+  driverId     String  @unique @db.ObjectId
+  color        String
+  type         String
   licensePlate String
   categoryType carType @default(SMALL_ANIMALS)
 }
