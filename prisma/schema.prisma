@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  DRIVER
+  PASSENGER
+}
+
+enum carType {
+  MINI_ANIMALS
+  SMALL_ANIMALS
+  BIG_ANIMALS
+  EXOTIC_ANIMALS
+}
+
+model User {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String
+  password  String
+  role      UserRole   @default(PASSENGER)
+  driver    Driver?
+  passenger Passenger?
+}
+
+model Car {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  driver   Driver @relation(fields: [driverId], references: [id])
+  driverId String @unique @db.ObjectId
+  color    String
+  type     String
+  licensePlate String
+  categoryType carType @default(SMALL_ANIMALS)
+}
+
+model Passenger {
+  id        String        @id @default(auto()) @map("_id") @db.ObjectId
+  user      User          @relation(fields: [userId], references: [id])
+  userId    String        @unique @db.ObjectId
+  rating    Rating        @relation(fields: [ratingId], references: [id])
+  ratingId  String        @unique @db.ObjectId
+  trip      Trip[]
+  payment   PaymentInfo[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model Driver {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String   @unique @db.ObjectId
+  rating        Rating   @relation(fields: [ratingId], references: [id])
+  ratingId      String   @unique @db.ObjectId
+  cars          Car[]
+  trip          Trip[]
+  licenseNumber String
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+}
+
+model Rating {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  driver    Driver?
+  passenger Passenger?
+  value     Float
+  comment   String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Trip {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  passenger     Passenger? @relation(fields: [passengerId], references: [id])
+  passengerId   String     @unique @db.ObjectId
+  Driver        Driver?    @relation(fields: [driverId], references: [id])
+  driverId      String     @unique @db.ObjectId
+  startLocation String
+  endLocation   String
+  startTime     DateTime
+  endTime       DateTime?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model PaymentInfo {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  passenger   Passenger? @relation(fields: [passengerId], references: [id])
+  passengerId String     @unique @db.ObjectId
+  cardNumber  String
+  expiration  DateTime
+  cvv         String
+  createdAt   DateTime   @default(now())
+}
