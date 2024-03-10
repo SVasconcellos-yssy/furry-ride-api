@@ -22,52 +22,48 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Furry Ride - Backend
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Bem-vindo ao repositório do backend da aplicação "Furry Ride"! Este é o componente responsável por lidar com as operações no servidor, incluindo autenticação e interação com o banco de dados.
 
-## Installation
+## Tecnologias Utilizadas
 
-```bash
-$ npm install
-```
+- NestJS: Framework Node.js para construção de APIs escaláveis.
+- JWT (JSON Web Tokens): Biblioteca para autenticação segura.
+- MongoDB: Sistema de gerenciamento de banco de dados NoSQL.
 
-## Running the app
+## Configuração do ambiente
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
+### 1. Clone este repositório
 
 ```bash
-# unit tests
-$ npm run test
+git clone https://github.com/SVasconcellos-yssy/furry-ride-api.git
+```
+### 2. Acesse o diretorio do projeto
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```bash
+cd cd furry-ride-api
 ```
 
-## Support
+### 3. Instale as dependências
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+npm install
+```
 
-## Stay in touch
+## Executando o Backend:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 1. Inicie o servidor de desenvolvimento.
 
-## License
+```bash
+npm run start:dev
+```
 
-Nest is [MIT licensed](LICENSE).
+### 2.O backend estará disponível em http://localhost:7000.
+
+## Funcionalidades Implementadas: 
+
+- Roteamento e Controladores: Configuração de rotas e controladores no NestJS.
+- Autenticação JWT: Geração e validação segura de tokens para autenticação de usuários.
+- Integração com MongoDB: Armazenamento e recuperação de dados relacionados aos usuários 
+
